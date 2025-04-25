@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -32,6 +31,7 @@
       background: #222; color: #fff; border: none; cursor: pointer;
 	  border-radius: 8px;
 	  transition: background 0.2s ease;
+	  flex-shrink: 0;
     }
 
     nav.menu ul { list-style: none; }
@@ -42,7 +42,7 @@
       padding: 15px 20px; font-size: 18px;
       color: #ccc; background: none; border: none; cursor: pointer;
       display: block;
-      text-decoration: none;
+	  text-decoration: none;
     }
     .menu-item > a:hover,
     .menu-item > button:hover { background: #333; color: #fff; }
@@ -70,6 +70,7 @@
       #menuButton { font-size: 0.9rem; padding: 8px 12px; }
       .menu-item > a, .menu-item > button { font-size: 16px; padding: 12px 16px; }
       .submenu li a { font-size: 14px; padding: 10px 30px; }
+	  
     }
 	#topbar {
 	  position: fixed;
@@ -81,15 +82,37 @@
 	  z-index: 1100;
 	  display: flex;
 	  align-items: center;
-	  padding: 0 10px;
+	  justify-content: flex-end;
+	  padding: 0 15px;
 	  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 	}
+		#logoBlock img {
+	  height: 28px;
+	  width: auto;
+	  border-radius: 4px;
+	}
+	  
+	#logoBlock {
+	  display: flex;
+	  align-items: center;
+	  
+	  gap: 8px;
+	  color: #eee;
+	  font-size: 1rem;
+	  font-weight: bold;
+	}
+
+	
   </style>
 </head>
 <body>
   <div id="topbar">
-	<button id="menuButton">☰ Серии</button>
+	<button id="menuButton">☰ Навигация</button>
+	<div id="logoBlock">
+	  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi4Tj85AGsKm-fNSnR4e74MIBVlCsZ-kNuKw&s" alt="Логотип" />
+	  <span>DebDub</span>
   </div>
+</div>
   <div id="wrapper">
     <aside id="sidebar">
       <nav class="menu">
