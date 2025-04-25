@@ -2,17 +2,214 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>D-ON Ep1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DebDub</title>
   <style>
-    body { margin: 0; background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; }
-    video { max-width: 100%; max-height: 100%; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body, html { height: 100%; font-family: Arial, sans-serif; background: #000; color: #eee; padding-top: 50px; }
+
+    #wrapper { display: flex; height: 100%; overflow: hidden; position: relative; }
+    aside#sidebar {
+      width: 250px;
+      background: #111;
+      padding-top: 60px;
+      position: fixed;
+      top: 0;
+      left: -250px;
+      height: 100%;
+      z-index: 1000;
+      transition: left 0.3s ease;
+      overflow-y: auto;
+    }
+    aside#sidebar.open {
+      left: 0;
+    }
+    main#content { flex: 1; padding: 20px; overflow-y: auto; width: 100%; }
+
+    #menuButton {
+      position: fixed; top: 10px; left: 10px; z-index: 1100;
+      padding: 10px 15px; font-size: 1rem;
+      background: #222; color: #fff; border: none; cursor: pointer;
+	  border-radius: 8px;
+	  transition: background 0.2s ease;
+    }
+
+    nav.menu ul { list-style: none; }
+    .menu-item { border-bottom: 1px solid #222; }
+    .menu-item > a,
+    .menu-item > button {
+      width: 100%; text-align: left;
+      padding: 15px 20px; font-size: 18px;
+      color: #ccc; background: none; border: none; cursor: pointer;
+      display: block;
+    }
+    .menu-item > a:hover,
+    .menu-item > button:hover { background: #333; color: #fff; }
+
+    .submenu {
+      list-style: none; max-height: 0; overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: #222;
+    }
+    .submenu.open { max-height: 500px; }
+    .submenu li a {
+      padding: 12px 40px; font-size: 16px; color: #aaa; display: block;
+    }
+    .submenu li a:hover { color: #fff; background: #333; }
+
+    #content section { max-width: 800px; margin: auto; }
+    #content h1 { margin-bottom: 10px; font-size: 2rem; }
+    #content p { margin-bottom: 20px; line-height: 1.5; }
+
+    video { width: 100%; max-height: 60vh; border: none; background: #000; display: none; }
+    #textContent { display: none; padding: 20px; background: #111; margin-top: 20px; border-radius: 8px; }
+
+    @media (max-width: 600px) {
+      aside#sidebar { width: 200px; }
+      #menuButton { font-size: 0.9rem; padding: 8px 12px; }
+      .menu-item > a, .menu-item > button { font-size: 16px; padding: 12px 16px; }
+      .submenu li a { font-size: 14px; padding: 10px 30px; }
+    }
+	#topbar {
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 65px;
+	  background: #111;
+	  z-index: 1100;
+	  display: flex;
+	  align-items: center;
+	  padding: 0 10px;
+	  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+	}
   </style>
 </head>
 <body>
-  <video
-    src="https://www.dropbox.com/scl/fi/ruht8iy2etf02vfjwp1am/.mp4?rlkey=w7sbbxkjt0uh3kwlcmzk9j5fp&st=u7p1iq4v&raw=1"
-    controls
-    autoplay
-  ></video>
+  <div id="topbar">
+	<button id="menuButton">☰ Серии</button>
+  </div>
+  <div id="wrapper">
+    <aside id="sidebar">
+      <nav class="menu">
+        <ul>
+          <li class="menu-item"><a href="#" id="homeLink">Главная</a></li>
+          <li class="menu-item">
+            <button class="expand-btn">D-ON! ▾</button>
+            <ul class="submenu">
+              <li><a href="#" data-src="https://www.dropbox.com/scl/fi/ruht8iy2etf02vfjwp1am/.mp4?rlkey=w7sbbxkjt0uh3kwlcmzk9j5fp&st=rx8wzh5z&raw=1">Эпизод 1</a></li>
+              <li><a href="#" data-src="https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1">Чифирь и конь</a></li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <button class="expand-btn">НеСчастливая Звезда ▾</button>
+            <ul class="submenu">
+              <li><a href="#" data-type="text" data-content="В разработке и бла-бла-бла">Эпизод 1</a></li>
+            </ul>
+          </li>
+          <li class="menu-item"><a href="#" id="Memee">Мем</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main id="content">
+      <section id="intro">
+        <h1>Добро пожаловать, сынки!</h1>
+        <p>Слева сверху есть выбор cumтента. Туда я предлагаю добавлять все наши переозвучки, как показано в этой демке.</p>
+		<p>Эту страницу я кстати стилизую под "кто мы" и тд, как вам идея?</p>
+      </section>
+	 <section id="meme" style="display: none"; text-align: center; margin-top: 4000px;">
+		<img src="https://media.tenor.com/q0Ejci9EQhcAAAAi/rick-astley-rick-roll.gif"
+          alt="RickRoll"
+          style="max-width: 100%; height: auto;">
+
+		<p>А ещё я научился вставлять картинки)</p>
+	  </section>
+	  
+      <video id="player" controls>
+        <source src="" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+      </video>
+	  
+      <div id="textContent"></div>
+    </main>
+  </div>
+
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const sidebar = document.getElementById('sidebar');
+    const player = document.getElementById('player');
+    const intro = document.getElementById('intro');
+    const textContent = document.getElementById('textContent');
+    const homeLink = document.getElementById('homeLink');
+	const meme = document.getElementById('meme');
+	const Memee = document.getElementById('Memee');
+	
+    menuButton.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.expand-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const submenu = btn.nextElementSibling;
+        submenu.classList.toggle('open');
+        btn.textContent = btn.textContent.endsWith('▾')
+          ? btn.textContent.replace('▾', '▸')
+          : btn.textContent.replace('▸', '▾');
+      });
+    });
+
+    homeLink.addEventListener('click', e => {
+      e.preventDefault();
+      intro.style.display = 'block';
+      meme.style.display = 'none';
+      player.pause();
+      player.removeAttribute('src');
+      player.load();
+      player.style.display = 'none';
+      textContent.style.display = 'none';
+      sidebar.classList.remove('open');
+    });
+	
+	Memee.addEventListener('click', e=> {
+	  e.preventDefault();
+	  
+      intro.style.display = 'none';
+	  player.pause();
+      player.removeAttribute('src');
+      player.load();
+      player.style.display = 'none';
+      textContent.style.display = 'none';
+      sidebar.classList.remove('open');
+	  meme.style.display = 'block';
+	});
+
+    document.querySelectorAll('.menu-item a').forEach(link => {
+      if (link.id === 'homeLink' || link.id === 'Memee') return; // пропустить "Главную"
+      link.addEventListener('click', e => {
+        e.preventDefault();
+
+        const src = link.getAttribute('data-src');
+        const type = link.getAttribute('data-type');
+        const content = link.getAttribute('data-content');
+
+        intro.style.display = 'none';
+		meme.style.display = 'none';
+        player.style.display = 'none';
+        textContent.style.display = 'none';
+
+        if (type === 'text' && content) {
+          textContent.innerText = content;
+          textContent.style.display = 'block';
+        } else if (src) {
+          player.src = src;
+          player.load();
+          player.style.display = 'block';
+          
+        }
+
+        sidebar.classList.remove('open');
+      });
+    });
+  </script>
 </body>
 </html>
