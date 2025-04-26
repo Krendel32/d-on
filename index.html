@@ -5,7 +5,7 @@
   <title>DebDub</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body, html { height: 100%; font-family: Arial, sans-serif; background: #000; color: #eee; padding-top: 50px; }
+    body, html { height: 100%; font-family: Arial, sans-serif; background: #000; color: #eee; padding-top: 30px; }
 
     #wrapper { display: flex; height: 100%; overflow: hidden; position: relative; }
     aside#sidebar {
@@ -19,6 +19,8 @@
       z-index: 1000;
       transition: left 0.3s ease;
       overflow-y: auto;
+	  display: flex;
+	  flex-direction: column;
     }
     aside#sidebar.open {
       left: 0;
@@ -26,16 +28,21 @@
     main#content { flex: 1; padding: 20px; overflow-y: auto; width: 100%; }
 
     #menuButton {
-	
       position: fixed; top: 8px; left: 10px; z-index: 1100;
-      padding: 10px 15px; font-size: 1rem;
+      padding: 10px 10px; font-size: 1rem;
       background: #222; color: #fff; border: none; cursor: pointer;
 	  border-radius: 8px;
 	  transition: background 0.2s ease;
 	  flex-shrink: 0;
     }
 
-    nav.menu ul { list-style: none; }
+	nav.menu {
+	  flex: 1;
+	  display: flex;
+	  flex-direction: column;
+	}
+
+    nav.menu ul { list-style: none; flex-grow: 1;}
     .menu-item { border-bottom: 2px solid #222; }
     .menu-item > a,
     .menu-item > button {
@@ -63,12 +70,22 @@
     #content h1 { margin-bottom: 10px; font-size: 2rem; }
     #content p { margin-bottom: 20px; line-height: 1.5; }
 
-    video { width: 100%; max-height: 60vh; border: none; background: #000; display: none; }
-    #textContent { display: none; padding: 20px; background: #111; margin-top: 20px; border-radius: 8px; }
+    video { width: 60%; max-height: 60vh; border: none; background: #000; display: none; margin: auto; padding-top: 15px}
+    #textContent { 
+	  display: none; 
+	  padding: 20px; 
+	  background: #222222; 
+	  margin-top: 20px; 
+	  border-radius: 8px;
+	  word-wrap: break-word;   /* Переносит слова, если они слишком длинные */
+      overflow-wrap: break-word; /* То же самое для новых стандартов */
+	  white-space: normal;  
+	  }
 
     @media (max-width: 600px) {
+	  video { width: 100%}
       aside#sidebar { width: 200px; }
-      #menuButton { position: fixed; top: 11px; left: 15px; font-size: 0.9rem; padding: 8px 12px; }
+      #menuButton { position: fixed; top: 11px; left: 15px; font-size: 0.9rem; padding: 8px 8px; }
       .menu-item > a, .menu-item > button { font-size: 16px; padding: 12px 16px; }
       .submenu li a { font-size: 14px; padding: 10px 30px; }
 	  
@@ -88,22 +105,72 @@
 	  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 	}
 	#logoBlock img {
-	  height: 28px;
+	  height: 42px;
 	  width: auto;
 	  border-radius: 4px;
-	}
-	  
+	} 
 	#logoBlock {
 	  display: flex;
 	  align-items: center;
-	  
-
 	  gap: 8px;
 	  color: #eee;
 	  font-size: 1rem;
 	  font-weight: bold;
 	}
+	#bottomLink {
+	  padding: 15px;
+	  top: 0;
+	  background: #111;
+	  text-align: center;
+	}
+	#bottomLink a {
+	  color: #ccc;
+	  text-decoration: none;
+	  font-size: 16px;
+	}
 
+	#bottomLink a:hover {
+	  color: #fff;
+	}
+	
+	#scrollPanel {
+	  display: flex;
+	  overflow-x: auto; /* ← горизонтальная прокрутка */
+	  gap: 10px; /* промежуток между кнопками */
+	  padding: 10px;
+	  margin-top: 20px;
+	  background: #111;
+	  border-radius: 10px;
+	  scrollbar-width: thin; /* для Firefox */
+	  croll-behavior: smooth;
+	}
+
+	#scrollPanel::-webkit-scrollbar {
+	
+	  height: 8px;
+	}
+
+	#scrollPanel::-webkit-scrollbar-thumb {
+	  background: #555;
+	  border-radius: 4px;
+	}
+
+	.scrollButton {
+	  flex: 0 0 auto; /* не растягивать кнопки */
+	  padding: 10px 20px;
+	  background: #333;
+	  color: #eee;
+	  border: none;
+	  border-radius: 6px;
+	  cursor: pointer;
+	  font-size: 16px;
+	  white-space: nowrap;
+	}
+
+	.scrollButton:hover {
+	  background: #555;
+	}
+	
 	
   </style>
 </head>
@@ -119,10 +186,11 @@
     <aside id="sidebar">
       <nav class="menu">
         <ul>
-          <li class="menu-item"><a href="#" id="homeLink">Главная</a></li>
+          <li class="menu-item"><a href="#" class="external" id="homeLink">Главная</a></li>
           <li class="menu-item">
             <button class="expand-btn">D-ON! ▾</button>
             <ul class="submenu">
+			  <li><a href='#' class="external" id="don">D-ON!</a></li>
               <li><a href="#" data-src="https://www.dropbox.com/scl/fi/ruht8iy2etf02vfjwp1am/.mp4?rlkey=w7sbbxkjt0uh3kwlcmzk9j5fp&st=rx8wzh5z&raw=1">Эпизод 1</a></li>
               <li><a href="#" data-src="https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1">Чифирь и конь</a></li>
             </ul>
@@ -130,11 +198,17 @@
           <li class="menu-item">
             <button class="expand-btn">НеСчастливая Звезда ▾</button>
             <ul class="submenu">
-              <li><a href="#" data-type="text" data-content="В разработке и бла-бла-бла">Эпизод 1</a></li>
+              <li><a href="#" class="external" id="uls">НеСчастливая Звезда</a></li>
             </ul>
           </li>
-          <li class="menu-item"><a href="#" id="Memee">Мем</a></li>
+          <li class="menu-item"><a href="#" class="external" id="Memee">Мем</a></li>
+		  <li class="menu-item"><a href="https://t.me/dbrep_bot" class="external" target="_blank">Нашли ошибку? Сообщите нам!</a></li>
         </ul>
+		<div id="bottomLink">
+		  <a href="https://t.me/+xDrz3EcbS-8zMmYy" class="external" target="_blank">
+			<img src="https://static-00.iconduck.com/assets.00/telegram-icon-1024x1024-bkzf373i.png" alt="TG" style="max-width: 100%; height: 42px"><p>Наш новостной ТГ</p>
+		  </a>
+		</div>
       </nav>
     </aside>
     <main id="content">
@@ -143,14 +217,14 @@
         <p>Слева сверху есть выбор cumтента. Туда я предлагаю добавлять все наши переозвучки, как показано в этой демке.</p>
 		<p>Эту страницу я кстати стилизую под "кто мы" и тд, как вам идея?</p>
       </section>
-	 <section id="meme" style="display: none"; text-align: center; margin-top: 4000px;">
-		<img src="https://media.tenor.com/q0Ejci9EQhcAAAAi/rick-astley-rick-roll.gif"
-          alt="RickRoll"
-          style="max-width: 100%; height: auto;">
-
-		<p>А ещё я научился вставлять картинки)</p>
+	  <section id="ulss" style="display: none; text-align: center; margin-top: 10px;">
 	  </section>
-	  
+	 <section id="meme" style="display: none; text-align: center; margin-top: 10px;">
+		<p>Рикролла больше нет, но я думаю что сюда вставить</p>
+	  </section>
+	  <section id="deion" style="display: none; text-align: center; margin-top: 10px;">
+		<img src="https://www.dropbox.com/scl/fi/mkfkg4sfkmc9qd1tbsgps/logo2.png?rlkey=p2gju3y44ci0stgkam2sc81rs&st=t07swefu&raw=1" alt="D-ON!" style="max-width: 100%; height: 150px;">
+	  </section>
       <video id="player" controls>
         <source src="" type="video/mp4">
         Ваш браузер не поддерживает видео.
@@ -169,6 +243,31 @@
     const homeLink = document.getElementById('homeLink');
 	const meme = document.getElementById('meme');
 	const Memee = document.getElementById('Memee');
+	const don = document.getElementById('don');
+	const deion = document.getElementById('deion');
+	const uls = document.getElementById('uls');
+	const ulss = document.getElementById('ulss');
+	const episodes = [
+	  { title: 'Эпизод 1', url: 'https://www.dropbox.com/scl/fi/ruht8iy2etf02vfjwp1am/.mp4?rlkey=w7sbbxkjt0uh3kwlcmzk9j5fp&st=rx8wzh5z&raw=1' },
+	  { title: 'Эпизод 2', url: 'https://example.com/episode2.mp4' },
+	  { title: 'Эпизод 3', url: 'https://example.com/episode3.mp4' },
+	  { title: 'Эпизод 4', url: 'https://example.com/episode4.mp4' },
+	  { title: 'Эпизод 5', url: 'https://example.com/episode5.mp4' },
+	];
+	
+	let buttonsHTML = '';
+
+	episodes.forEach(episode => {
+	  buttonsHTML += '<button class="scrollButton" onclick="loadEpisode(\'' + episode.url + '\')">' + episode.title + '</button>';
+	});
+	
+	function loadEpisode(src) {
+	  const player = document.getElementById('player');
+	  player.style.display = 'block';
+	  player.src = src;
+	  player.load();
+	  player.play();
+	}
 	
     menuButton.addEventListener('click', () => {
       sidebar.classList.toggle('open');
@@ -186,8 +285,10 @@
 
     homeLink.addEventListener('click', e => {
       e.preventDefault();
+	  deion.style.display = 'none';
       intro.style.display = 'block';
       meme.style.display = 'none';
+	  ulss.style.display = 'none';
       player.pause();
       player.removeAttribute('src');
       player.load();
@@ -196,9 +297,56 @@
       sidebar.classList.remove('open');
     });
 	
+	don.addEventListener('click', e => {
+      e.preventDefault();
+	  deion.style.display = 'block';
+      intro.style.display = 'none';
+      meme.style.display = 'none';
+	  ulss.style.display = 'none';
+      player.pause();
+      player.removeAttribute('src');
+      player.load();
+	  document.body.style.paddingTop = '13px';
+      textContent.style.display = 'block';
+	  if (window.innerWidth <= 600) {
+		textContent.innerHTML = '<h1 style="text-align: center; font-size: 1.3rem">Добро пожаловать в Клуб Дебильной Музыки!</h1><p style="text-indent: 2em">"D-ON!" - это наша переозвучка аниме "K-ON!"</p>';
+	  } else {
+		textContent.innerHTML = `
+		  <h1 style="text-align: center; font-size: 3rem">Добро пожаловать в Клуб Дебильной Музыки!</h1>
+		  <p style="text-indent: 2em; font-size: 1.5rem">"D-ON!" - это наша переозвучка аниме "K-ON!"</p>
+		  <div id="scrollPanel">
+			${buttonsHTML}
+		  </div>
+		`;
+	  }
+	  
+	  player.style.display = 'block';
+      sidebar.classList.remove('open');
+    });
+	
+	uls.addEventListener('click', e => {
+      e.preventDefault();
+	  deion.style.display = 'none';
+      intro.style.display = 'none';
+      meme.style.display = 'none';
+	  ulss.style.display = 'block';
+      player.pause();
+      player.removeAttribute('src');
+      player.load();
+      player.style.display = 'none';
+	  document.body.style.paddingTop = '13px';
+      textContent.style.display = 'block';
+	  if (window.innerWidth <= 600) {
+		textContent.innerHTML = '<h1 style="text-align: center; font-size: 1.3rem">В разработке!</h1><p style="text-align: center"><img src="https://www.dropbox.com/scl/fi/u15u8hnv7vf3u7smaoqnu/.gif?rlkey=eysm0m5zdh3tisejkx3mxv1le&st=k6e8bqpg&raw=1" alt="Деградация" style="max-width: 100%; height: 150px; text-align: center"></p>';
+	  } else {
+		textContent.innerHTML = '<h1 style="text-align: center; font-size: 3rem">В разработке!</h1><p style="text-align: center"><img src="https://www.dropbox.com/scl/fi/u15u8hnv7vf3u7smaoqnu/.gif?rlkey=eysm0m5zdh3tisejkx3mxv1le&st=k6e8bqpg&raw=1" alt="Деградация" style="max-width: 100%; height: 500px"></p>';
+	  }
+      sidebar.classList.remove('open');
+    });
+	
 	Memee.addEventListener('click', e=> {
 	  e.preventDefault();
-	  
+	  deion.style.display = 'none';
       intro.style.display = 'none';
 	  player.pause();
       player.removeAttribute('src');
@@ -210,7 +358,7 @@
 	});
 
     document.querySelectorAll('.menu-item a').forEach(link => {
-      if (link.id === 'homeLink' || link.id === 'Memee') return; // пропустить "Главную"
+      if (link.classList.contains('external')) return; // пропуск страниц
       link.addEventListener('click', e => {
         e.preventDefault();
 
@@ -218,6 +366,7 @@
         const type = link.getAttribute('data-type');
         const content = link.getAttribute('data-content');
 
+		deion.style.display = 'none';
         intro.style.display = 'none';
 		meme.style.display = 'none';
         player.style.display = 'none';
