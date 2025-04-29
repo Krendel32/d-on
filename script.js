@@ -22,6 +22,52 @@ const episodesUls = [
   { title: 'Не жмать', url: 'https://www.dropbox.com/scl/fi/n329a23pj62v91dla7r3z/Rick-Astley-Never-Gonna-Give-You-Up-Video.mp4?rlkey=p1nhpu17b02oy52f0waygh6jk&st=mztns8ud&raw=1' },
 ];
 
+function preloadImages(...urls) {
+  urls.forEach(url => {
+    const img = new Image();
+    img.src = url;
+  });
+}
+
+preloadImages(
+  'https://www.dropbox.com/scl/fi/fohsj1o875a07dvt9qshf/97_20250429195538.png?rlkey=ikm1njj8aicz4umqczw2wb0cd&st=ksqg3jrv&raw=1',
+  'https://www.dropbox.com/scl/fi/swmkjabc418wzhpf1ook3/pngwing.com-2.png?rlkey=gca25464k5aeo73hwqs76u5qx&st=u9mh0ytm&raw=1',
+  'https://www.dropbox.com/scl/fi/dafr4x3li2fi3908he7fc/pngwing.com-4.png?rlkey=ya1ywkh8b6s36ef3mx30z0mx4&st=1b45092c&raw=1',
+  'https://www.dropbox.com/scl/fi/mnlqtnc4mntp4xg9rb3z8/pngwing.com-5.png?rlkey=xqlzx2jdkuqvdib9k2bmpxilh&st=zlrqj5ai&raw=1'
+);
+
+const backgrounds = {
+  default: {
+    left: '',
+    right: ''
+  },
+  don: {
+    left: 'https://www.dropbox.com/scl/fi/fohsj1o875a07dvt9qshf/97_20250429195538.png?rlkey=ikm1njj8aicz4umqczw2wb0cd&st=ksqg3jrv&raw=1',
+    right: 'https://www.dropbox.com/scl/fi/swmkjabc418wzhpf1ook3/pngwing.com-2.png?rlkey=gca25464k5aeo73hwqs76u5qx&st=u9mh0ytm&raw=1'
+  },
+  uls: {
+    left: 'https://www.dropbox.com/scl/fi/dafr4x3li2fi3908he7fc/pngwing.com-4.png?rlkey=ya1ywkh8b6s36ef3mx30z0mx4&st=1b45092c&raw=1',
+    right: 'https://www.dropbox.com/scl/fi/mnlqtnc4mntp4xg9rb3z8/pngwing.com-5.png?rlkey=xqlzx2jdkuqvdib9k2bmpxilh&st=zlrqj5ai&raw=1'
+  }
+};
+function setBackgroundSet(key) {
+  const left = document.getElementById('bgLeft');
+  const right = document.getElementById('bgRight');
+  const bg = backgrounds[key] || backgrounds.default;
+
+  // скрываем на мобильных
+  if (window.innerWidth < 600) {
+    left.style.display = 'none';
+    right.style.display = 'none';
+    return;
+  }
+
+  left.src = bg.left;
+  right.src = bg.right;
+  left.style.display = bg.left ? 'block' : 'none';
+  right.style.display = bg.right ? 'block' : 'none';
+}
+
 let buttonsDonHTML = episodesDon.map(episode => 
   `<button class="scrollButton donButton" onclick="loadEpisode('playerDon', '${episode.url}', this)">${episode.title}</button>`
 ).join('');
@@ -93,6 +139,7 @@ document.querySelectorAll('.expand-btn').forEach(btn => {
 // Переход на Главную
 homeLink.addEventListener('click', e => {
   e.preventDefault();
+  setBackgroundSet('default');
   resetAllPlayers();
   deion.style.display = 'none';
   intro.style.display = 'block';
@@ -108,6 +155,7 @@ const pageContent = document.getElementById('pageContent'); // Новый кон
 
 don.addEventListener('click', e => {
   e.preventDefault();
+  setBackgroundSet('don');
   resetAllPlayers();
   deion.style.display = 'block';
   intro.style.display = 'none';
@@ -115,7 +163,6 @@ don.addEventListener('click', e => {
   ulss.style.display = 'none';
   document.body.style.paddingTop = '13px';
   textContent.style.display = 'block';
-
   pageContent.innerHTML = `
     <h1 style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.3rem' : '3rem'}">Добро пожаловать в Клуб Дебильной Музыки!</h1>
     <p style="text-indent: 2em; font-size: ${window.innerWidth <= 600 ? '1rem' : '1.5rem'}">"D-ON!" - это наша переозвучка аниме "K-ON!"</p>
@@ -138,6 +185,7 @@ don.addEventListener('click', e => {
 // Страница "В разработке"
 uls.addEventListener('click', e => {
   e.preventDefault;
+  setBackgroundSet('uls');
   resetAllPlayers();
   deion.style.display = 'none';
   intro.style.display = 'none';
@@ -160,6 +208,7 @@ uls.addEventListener('click', e => {
 // Мем-кнопка
 Memee.addEventListener('click', e => {
   e.preventDefault();
+  setBackgroundSet('default');
   resetAllPlayers();
   deion.style.display = 'none';
   intro.style.display = 'none';
