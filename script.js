@@ -68,6 +68,18 @@ function setBackgroundSet(key) {
   right.style.display = bg.right ? 'block' : 'none';
 }
 
+document.addEventListener('fullscreenchange', () => {
+  const isFullscreen = !!document.fullscreenElement;
+
+  if (isFullscreen) {
+    playerDon.style.border = 'none';
+	playerUls.style.border = 'none';
+  } else {
+    playerDon.style.border = '3px solid #444';
+	playerUls.style.border = '3px solid #444';
+  }
+});
+
 let buttonsDonHTML = episodesDon.map(episode => 
   `<button class="scrollButton donButton" onclick="loadEpisode('playerDon', '${episode.url}', this)">${episode.title}</button>`
 ).join('');
@@ -85,6 +97,21 @@ function resetAllPlayers() {
       player.load();
       player.style.display = 'none';
     }
+  });
+}
+
+function initExpandableBlocks() {
+  document.querySelectorAll('.expandableBlock').forEach(block => {
+    const btn = block.querySelector('.toggleMoreBtn');
+    const more = block.querySelector('.moreText');
+    const dots = block.querySelector('.dots');
+
+    btn.addEventListener('click', () => {
+      const expanded = more.style.display === 'inline';
+      more.style.display = expanded ? 'none' : 'inline';
+      dots.style.display = expanded ? 'inline' : 'none';
+      btn.textContent = expanded ? 'Показать больше' : 'Скрыть';
+    });
   });
 }
 
@@ -120,6 +147,25 @@ function loadEpisode(playerId, src, button) {
   }
 }
 
+function monolith(mode = 1) {
+  if (mode === 1) {
+    // Включить монолитный стиль
+    textContent.style.display = 'block';
+    textContent.style.padding = '20px';
+    textContent.style.background = '#222';
+    textContent.style.marginTop = '0';
+    textContent.style.borderRadius = '8px';
+    textContent.style.margin = '20px auto';
+  } else {
+    // Отключить / сбросить стиль
+    textContent.style.display = 'none';
+    textContent.style.padding = '';
+    textContent.style.background = '';
+    textContent.style.marginTop = '';
+    textContent.style.borderRadius = '';
+    textContent.style.margin = '';
+  }
+}
 // Меню-кнопка
 menuButton.addEventListener('click', () => {
   sidebar.classList.toggle('open');
@@ -139,13 +185,33 @@ document.querySelectorAll('.expand-btn').forEach(btn => {
 // Переход на Главную
 homeLink.addEventListener('click', e => {
   e.preventDefault();
+  monolith(0);
   setBackgroundSet('default');
   resetAllPlayers();
   deion.style.display = 'none';
-  intro.style.display = 'block';
   meme.style.display = 'none';
   ulss.style.display = 'none';
-  textContent.style.display = 'none';
+  textContent.style.display = 'block';
+  textContent.innerHTML = ''; // Очищаем
+
+  // Первый блок
+  const welcomeBlock = document.createElement('div');
+  welcomeBlock.className = 'textBlock';
+  welcomeBlock.innerHTML = `
+    <h2>Добро пожаловать!</h2>
+    <p>Это сайт проекта DebDub — здесь вы найдёте наши переозвучки, мемы и многое другое.</p>
+  `;
+  textContent.appendChild(welcomeBlock);
+
+  // Второй блок
+  const infoBlock = document.createElement('div');
+  infoBlock.className = 'textBlock';
+  infoBlock.innerHTML = `
+    <h2>О нас</h2>
+    <p>Мы — команда энтузиастов, которые решили по-своему взглянуть на озвучку классики. Да, это абсурдно. Да, это по-нашему.</p>
+  `;
+  textContent.appendChild(infoBlock);
+
   sidebar.classList.remove('open');
   document.querySelector('main#content').scrollTo({ top: 0});
 });
@@ -157,50 +223,94 @@ don.addEventListener('click', e => {
   e.preventDefault();
   setBackgroundSet('don');
   resetAllPlayers();
+  monolith(1);
   deion.style.display = 'block';
-  intro.style.display = 'none';
   meme.style.display = 'none';
   ulss.style.display = 'none';
   document.body.style.paddingTop = '13px';
-  textContent.style.display = 'block';
-  pageContent.innerHTML = `
-    <h1 style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.3rem' : '3rem'}">Добро пожаловать в Клуб Дебильной Музыки!</h1>
-    <p style="text-indent: 2em; font-size: ${window.innerWidth <= 600 ? '1rem' : '1.5rem'}">"D-ON!" - это наша переозвучка аниме "K-ON!"</p>
+
+  textContent.innerHTML = `
+    <h1 style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.3rem' : '3rem'}">
+      Добро пожаловать в Клуб Дебильной Музыки!
+    </h1>
+    <p style="text-align: center; font-size: ${window.innerWidth <= 600 ? '0.8rem' : '1rem'}">
+      <em>"D-ON!" - это наша переозвучка аниме "K-ON!"</em>
+    </p>
+
+    <div class="expandableBlock">
+      <h2 style="font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}">Описание</h2>
+      <p>
+        Это краткое описание.
+        <span class="dots">...</span>
+        <span class="moreText" style="display: none;">
+          Вот и полное описание. Здесь можно писать более длинный текст, который раскрывается при клике.
+        </span>
+      </p>
+      <button class="toggleMoreBtn">Показать больше</button>
+    </div>
   `;
-  
+
+  // Плеер
   playerDon.style.display = 'block';
-  
-  document.getElementById('scrollPanel')?.remove();
+  textContent.appendChild(playerDon);
+
+  // Панель с кнопками эпизодов
   const scrollPanel = document.createElement('div');
   scrollPanel.id = 'scrollPanel';
   scrollPanel.innerHTML = buttonsDonHTML;
-  pageContent.appendChild(scrollPanel);
-  
+  textContent.appendChild(scrollPanel);
+
+  initExpandableBlocks();
+
   sidebar.classList.remove('open');
-
   document.querySelector('main#content').scrollTo({ top: 0});
-
 });
+
 
 // Страница "В разработке"
 uls.addEventListener('click', e => {
-  e.preventDefault;
+  e.preventDefault();
   setBackgroundSet('uls');
   resetAllPlayers();
+  monolith(1);
   deion.style.display = 'none';
-  intro.style.display = 'none';
   meme.style.display = 'none';
   ulss.style.display = 'block';
   document.body.style.paddingTop = '13px';
-  textContent.style.display = 'block';
 
-  pageContent.innerHTML = `
-    <h1 style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.3rem' : '3rem'}">В разработке!</h1>
-    <p style="text-indent: 2em; font-size: ${window.innerWidth <= 600 ? '1rem' : '1.5rem'}">Когда-нибудь выйдет</p>
-    <div id="scrollPanel">${buttonsUlsHTML}</div>
+  textContent.innerHTML = `
+    <h1 style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.3rem' : '3rem'}">
+      В разработке!
+    </h1>
+    <p style="text-align: center; font-size: ${window.innerWidth <= 600 ? '0.8rem' : '1rem'}">
+      <em>Когда-нибудь выйдет...</em>
+    </p>
+
+    <div class="expandableBlock">
+      <h2 style="font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}">Описание</h2>
+      <p>
+        Важно!
+        <span class="dots">...</span>
+        <span class="moreText" style="display: none;">
+          Не жмите на кнопку серии, иначе сайт полетил по пизде!
+        </span>
+      </p>
+      <button class="toggleMoreBtn">Показать больше</button>
+    </div>
   `;
 
+  // Плеер
   playerUls.style.display = 'block';
+  textContent.appendChild(playerUls);
+
+  // Панель с кнопками эпизодов
+  const scrollPanel = document.createElement('div');
+  scrollPanel.id = 'scrollPanel';
+  scrollPanel.innerHTML = buttonsUlsHTML;
+  textContent.appendChild(scrollPanel);
+
+  initExpandableBlocks();
+
   sidebar.classList.remove('open');
   document.querySelector('main#content').scrollTo({ top: 0});
 });
@@ -211,7 +321,6 @@ Memee.addEventListener('click', e => {
   setBackgroundSet('default');
   resetAllPlayers();
   deion.style.display = 'none';
-  intro.style.display = 'none';
   ulss.style.display = 'none';
   textContent.style.display = 'none';
   meme.style.display = 'block';
@@ -231,7 +340,6 @@ document.querySelectorAll('.menu-item a').forEach(link => {
     const content = link.getAttribute('data-content');
 
     deion.style.display = 'none';
-    intro.style.display = 'none';
     meme.style.display = 'none';
     textContent.style.display = 'none';
 
@@ -248,4 +356,8 @@ document.querySelectorAll('.menu-item a').forEach(link => {
 
     sidebar.classList.remove('open');
   });
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  homeLink.click(); // симулируем клик по "Главная"
 });
