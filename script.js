@@ -15,11 +15,21 @@ const playerUls = document.getElementById('playerUls');
 
 const episodesDon = [
   { title: 'Эпизод 1', url: 'https://www.dropbox.com/scl/fi/ruht8iy2etf02vfjwp1am/.mp4?rlkey=w7sbbxkjt0uh3kwlcmzk9j5fp&st=rx8wzh5z&raw=1' },
-  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  //{ title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
 ];
 
 const episodesUls = [
   { title: 'Не жмать', url: 'https://www.dropbox.com/scl/fi/n329a23pj62v91dla7r3z/Rick-Astley-Never-Gonna-Give-You-Up-Video.mp4?rlkey=p1nhpu17b02oy52f0waygh6jk&st=mztns8ud&raw=1' },
+];
+
+const donQuotes = [
+  'Не аниме, а карнавал абсурда!',
+  'Музыка, абсурд и никакого здравого смысла',
+  'Чифирь слабый какой-то',
+];
+
+const ulsQuotes = [
+  '"Деградирующая Звезда" — это не метафора, это диагноз',
 ];
 
 function preloadImages(...urls) {
@@ -166,6 +176,15 @@ function monolith(mode = 1) {
     textContent.style.margin = '';
   }
 }
+
+function randomQuote(id, quotes = []) {
+  const el = document.getElementById(id);
+  if (!el || quotes.length === 0) return;
+
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  el.innerHTML = `<p style="text-align: center; font-size: ${window.innerWidth <= 600 ? '0.8rem' : '1rem'}"><em>${quotes[randomIndex]}</em></p>`;
+}
+
 // Меню-кнопка
 menuButton.addEventListener('click', () => {
   sidebar.classList.toggle('open');
@@ -233,9 +252,7 @@ don.addEventListener('click', e => {
     <h1 style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.3rem' : '3rem'}">
       Добро пожаловать в Клуб Дебильной Музыки!
     </h1>
-    <p style="text-align: center; font-size: ${window.innerWidth <= 600 ? '0.8rem' : '1rem'}">
-      <em>"D-ON!" - это наша переозвучка аниме "K-ON!"</em>
-    </p>
+    <div id="donQuote"></div>
 
     <div class="expandableBlock">
       <h2 style="font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}">Описание</h2>
@@ -261,7 +278,7 @@ don.addEventListener('click', e => {
   textContent.appendChild(scrollPanel);
 
   initExpandableBlocks();
-
+  randomQuote('donQuote', donQuotes);
   sidebar.classList.remove('open');
   document.querySelector('main#content').scrollTo({ top: 0});
 });
@@ -282,9 +299,7 @@ uls.addEventListener('click', e => {
     <h1 style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.3rem' : '3rem'}">
       В разработке!
     </h1>
-    <p style="text-align: center; font-size: ${window.innerWidth <= 600 ? '0.8rem' : '1rem'}">
-      <em>Когда-нибудь выйдет...</em>
-    </p>
+    <div id="ulsQuote"></div>
 
     <div class="expandableBlock">
       <h2 style="font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}">Описание</h2>
@@ -310,7 +325,7 @@ uls.addEventListener('click', e => {
   textContent.appendChild(scrollPanel);
 
   initExpandableBlocks();
-
+  randomQuote('ulsQuote', ulsQuotes);
   sidebar.classList.remove('open');
   document.querySelector('main#content').scrollTo({ top: 0});
 });
