@@ -72,12 +72,12 @@ nav.menu ul { list-style: none; flex-grow: 1;}
 #content p { margin-bottom: 20px; line-height: 1.5; }
 
 video { width: 60%; max-height: 60vh; border: none; background: #000; display: none; margin: auto}
-#textContent { 
-  display: none; 
-  padding: 20px; 
-  background: #222222; 
-  margin-top: 20px; 
-  border-radius: 8px;
+#textContent {
+  display: none;
+  padding: 0;
+  background: none;
+  margin-top: 0;
+  border-radius: 0;
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
@@ -208,7 +208,7 @@ video { width: 60%; max-height: 60vh; border: none; background: #000; display: n
   display: none;
   bottom: 0;
   width: auto;
-  height: 400px;
+  height: 50%;
   opacity: 1;
   z-index: 0;
   pointer-events: none;
@@ -225,4 +225,33 @@ video { width: 60%; max-height: 60vh; border: none; background: #000; display: n
 #deion {
   position: relative;  /* важно! */
   z-index: 1;
+}
+
+.textBlock {
+  padding: 20px;
+  background: #222;
+  margin-top: 20px;
+  border-radius: 8px;
+  color: #eee;
+}
+
+.expandableBlock {
+  background: #111;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.toggleMoreBtn {
+  margin-top: 10px;
+  background: #333;
+  color: #eee;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.toggleMoreBtn:hover {
+  background: #555;
 }
