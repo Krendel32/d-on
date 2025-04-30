@@ -199,7 +199,7 @@ homeLink.addEventListener('click', e => {
   welcomeBlock.className = 'textBlock';
   welcomeBlock.innerHTML = `
     <h2>Добро пожаловать!</h2>
-    <p>Это сайт проекта DebDub — здесь вы найдёте наши переозвучки, мемы и многое другое.</p>
+    <p>Слева сверху есть выбор cumтента. Туда я предлагаю добавлять все наши переозвучки, как показано в этой демке.</p>
   `;
   textContent.appendChild(welcomeBlock);
 
@@ -207,8 +207,8 @@ homeLink.addEventListener('click', e => {
   const infoBlock = document.createElement('div');
   infoBlock.className = 'textBlock';
   infoBlock.innerHTML = `
-    <h2>О нас</h2>
-    <p>Мы — команда энтузиастов, которые решили по-своему взглянуть на озвучку классики. Да, это абсурдно. Да, это по-нашему.</p>
+    <h2>Абоба</h2>
+    <p>Эту страницу я кстати стилизую под "кто мы" и тд, как вам идея?.</p>
   `;
   textContent.appendChild(infoBlock);
 
