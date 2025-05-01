@@ -16,6 +16,24 @@ const playerUls = document.getElementById('playerUls');
 const episodesDon = [
   { title: 'Эпизод 1', url: 'https://www.dropbox.com/scl/fi/ruht8iy2etf02vfjwp1am/.mp4?rlkey=w7sbbxkjt0uh3kwlcmzk9j5fp&st=rx8wzh5z&raw=1' },
   //{ title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
+  { title: 'Мем но.1', url: 'https://www.dropbox.com/scl/fi/u5x4wcjgeh0fpc7ulkekq/.mp4?rlkey=koy1lhb5zmq15adi9ze7y8sij&st=w6ujd38o&raw=1' },
 ];
 
 const episodesUls = [
@@ -117,10 +135,10 @@ function initExpandableBlocks() {
     const dots = block.querySelector('.dots');
 
     btn.addEventListener('click', () => {
-      const expanded = more.style.display === 'inline';
-      more.style.display = expanded ? 'none' : 'inline';
-      dots.style.display = expanded ? 'inline' : 'none';
-      btn.textContent = expanded ? 'Показать больше' : 'Скрыть';
+      const isExpanded = more.classList.contains('expanded');
+      more.classList.toggle('expanded', !isExpanded);
+      dots.style.display = isExpanded ? 'inline' : 'none';
+      btn.textContent = isExpanded ? 'Показать больше' : 'Скрыть';
     });
   });
 }
@@ -232,7 +250,7 @@ homeLink.addEventListener('click', e => {
   textContent.appendChild(infoBlock);
 
   sidebar.classList.remove('open');
-  document.querySelector('main#content').scrollTo({ top: 0});
+  document.querySelector('main#content').scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 // Страница D-ON!
@@ -248,39 +266,50 @@ don.addEventListener('click', e => {
   ulss.style.display = 'none';
   document.body.style.paddingTop = '13px';
 
-  textContent.innerHTML = `
-    <h1 style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.3rem' : '3rem'}">
-      Добро пожаловать в Клуб Дебильной Музыки!
-    </h1>
-    <div id="donQuote"></div>
+textContent.innerHTML = `
+  <h1 style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.3rem' : '3rem'}">
+    Добро пожаловать в Клуб Дебильной Музыки!
+  </h1>
+  <div id="donQuote"></div>
 
-    <div class="expandableBlock">
-      <h2 style="font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}">Описание</h2>
-      <p>
-        Это краткое описание.
-        <span class="dots">...</span>
-        <span class="moreText" style="display: none;">
-          Вот и полное описание. Здесь можно писать более длинный текст, который раскрывается при клике.
-        </span>
-      </p>
-      <button class="toggleMoreBtn">Показать больше</button>
+  <div class="expandableBlock">
+    <h2 style="font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}; text-indent: 1em">Описание</h2>
+    <p style="text-indent: 1.5em;">
+      Что такое D-ON?
+      <span class="dots">...</span>
+    </p>
+    <div class="moreText">
+      <p style="text-indent: 1.5em;">D-ON (Или же Дейон) — это наш трэш-проект на основе аниме K-ON. Мы попытались соединить наш юмор, тонну абсурда и немного музыки, чтобы создать нечто уникальное.</p>
+      <p style="text-indent: 2.5em;">Роли озвучивают<br>
+	    Злодей Бо Финн - Юи (Фин), Уи, Нодока, Савако<br>
+	    Крендель - Рицу (Максим)<br>
+		Никита Доброжирович Македонский - Мио (Никита)<br>
+	    Психопатрик Батерман - Цумуги (Вадим)
+	  </p>
+
     </div>
-  `;
-
+    <button class="toggleMoreBtn">Показать больше</button>
+  </div>
+`;
   // Плеер
   playerDon.style.display = 'block';
   textContent.appendChild(playerDon);
 
   // Панель с кнопками эпизодов
+  const scrollContainer = document.createElement('div');
+  scrollContainer.className = 'scrollContainer';
+
   const scrollPanel = document.createElement('div');
   scrollPanel.id = 'scrollPanel';
   scrollPanel.innerHTML = buttonsDonHTML;
-  textContent.appendChild(scrollPanel);
+
+  scrollContainer.appendChild(scrollPanel);
+  textContent.appendChild(scrollContainer);
 
   initExpandableBlocks();
   randomQuote('donQuote', donQuotes);
   sidebar.classList.remove('open');
-  document.querySelector('main#content').scrollTo({ top: 0});
+  document.querySelector('main#content').scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 
@@ -301,17 +330,17 @@ uls.addEventListener('click', e => {
     </h1>
     <div id="ulsQuote"></div>
 
-    <div class="expandableBlock">
-      <h2 style="font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}">Описание</h2>
-      <p>
-        Важно!
-        <span class="dots">...</span>
-        <span class="moreText" style="display: none;">
-          Не жмите на кнопку серии, иначе сайт полетил по пизде!
-        </span>
-      </p>
-      <button class="toggleMoreBtn">Показать больше</button>
+  <div class="expandableBlock">
+    <h2 style="font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}; text-indent: 1em">Описание</h2>
+    <p style="text-indent: 1.5em;">
+      ВАЖНО
+      <span class="dots">...</span>
+    </p>
+    <div class="moreText">
+      <p style="text-indent: 1.5em;">Не жмите на кнопку, иначе сайт полетит по пизде!</p>
     </div>
+    <button class="toggleMoreBtn">Показать больше</button>
+  </div>
   `;
 
   // Плеер
@@ -327,7 +356,7 @@ uls.addEventListener('click', e => {
   initExpandableBlocks();
   randomQuote('ulsQuote', ulsQuotes);
   sidebar.classList.remove('open');
-  document.querySelector('main#content').scrollTo({ top: 0});
+  document.querySelector('main#content').scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 // Мем-кнопка
@@ -340,7 +369,7 @@ Memee.addEventListener('click', e => {
   textContent.style.display = 'none';
   meme.style.display = 'block';
   sidebar.classList.remove('open');
-  document.querySelector('main#content').scrollTo({ top: 0});
+  document.querySelector('main#content').scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 // Глобальная обработка ссылок
