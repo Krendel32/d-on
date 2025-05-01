@@ -290,12 +290,12 @@ video { width: 60%; max-height: 60vh; border: none; background: #000; display: n
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.5s ease;
-  display: block; /* обязательно! чтобы не ломался layout */
+  display: block;
   opacity: 0;
-  transition: max-height 0.5s ease, opacity 0.5s ease;
+  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
 .moreText.expanded {
-  max-height: 1000px; /* гарантированно больше любого контента */
+  max-height: 1000px;
   opacity: 1;
 }
