@@ -110,6 +110,7 @@ function resetAllPlayers() {
   });
 }
 
+
 function initExpandableBlocks() {
   document.querySelectorAll('.expandableBlock').forEach(block => {
     const btn = block.querySelector('.toggleMoreBtn');
@@ -210,15 +211,17 @@ homeLink.addEventListener('click', e => {
   deion.style.display = 'none';
   meme.style.display = 'none';
   ulss.style.display = 'none';
-  textContent.style.display = 'block';
-  textContent.innerHTML = ''; // Очищаем
+  textContent.innerHTML = '';
+  requestAnimationFrame(() => {
+    textContent.style.display = 'block';
+  });
 
   // Первый блок
   const welcomeBlock = document.createElement('div');
   welcomeBlock.className = 'textBlock';
   welcomeBlock.innerHTML = `
-    <h2>Добро пожаловать!</h2>
-    <p>Слева сверху есть выбор cumтента. Туда я предлагаю добавлять все наши переозвучки, как показано в этой демке.</p>
+    <h1 style="text-align: center">Добро пожаловать!</h1>
+    <p style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}">Слева сверху, в меню навигации, есть выбор желаемого контента. Ниже наведена краткая информация о нас</p>
   `;
   textContent.appendChild(welcomeBlock);
 
@@ -226,10 +229,14 @@ homeLink.addEventListener('click', e => {
   const infoBlock = document.createElement('div');
   infoBlock.className = 'textBlock';
   infoBlock.innerHTML = `
-    <h2>Абоба</h2>
-    <p>Эту страницу я кстати стилизую под "кто мы" и тд, как вам идея?.</p>
+    <h1 style="text-align: center">Кто же мы такие?</h1>
+    <p style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}">Мы - Проект пародийной переозвучки, созданный несколькими школьниками из СНГ для развлечения. Проект запущен 25 января 2025 года, и на сегодняшний день у нас готов только один проект - D-ON. На данный момент ведётся активная работа над новым проектом - над Деградирующей Звездой<br>
+	  Если хотите следить за прогрессом - подпишитесь на наш <a href="https://t.me/+xDrz3EcbS-8zMmYy" class="external" target="_blank" style="text-decoration: none; color: #b8c6ff">Телеграм канал</a><br>
+	  Также у нас есть <a href="https://www.youtube.com/@Deb_Dub" class="external" target="_blank" style="text-decoration: none; color: #ffb8b8">Ютуб канал</a>, на котором будут выкладываться все серии переозвучек, за которые нам не прилетит АП (да-да TBS, да-да...)
+	</p>
   `;
   textContent.appendChild(infoBlock);
+
 
   sidebar.classList.remove('open');
   document.querySelector('main#content').scrollTo({ top: 0, behavior: 'smooth' });
@@ -246,33 +253,50 @@ don.addEventListener('click', e => {
   deion.style.display = 'block';
   meme.style.display = 'none';
   ulss.style.display = 'none';
-  document.body.style.paddingTop = '13px';
 
-textContent.innerHTML = `
-  <h1 style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.3rem' : '3rem'}">
-    Добро пожаловать в Клуб Дебильной Музыки!
-  </h1>
-  <div id="donQuote"></div>
+  textContent.innerHTML = `
+    <h1 style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.3rem' : '3rem'}">
+      Добро пожаловать в Клуб Дебильной Музыки!
+    </h1>
+    <div id="donQuote"></div>
 
-  <div class="expandableBlock">
-    <h2 style="font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}; text-indent: 1em">Описание</h2>
-    <p style="text-indent: 1.5em;">
-      Что такое D-ON?
-      <span class="dots">...</span>
-    </p>
-    <div class="moreText">
-      <p style="text-indent: 1.5em;">D-ON (Или же Дейон) — это наш трэш-проект на основе аниме K-ON. Мы попытались соединить наш юмор, тонну абсурда и немного музыки, чтобы создать нечто уникальное.</p>
-      <p style="text-indent: 1.5em;">Роли озвучивают<br>
-	    Злодей Бо Финн - Юи (Фин), Уи, Нодока, Савако<br>
-	    Крендель - Рицу (Максим)<br>
-		Никита Доброжирович Македонский - Мио (Никита)<br>
-	    Психопатрик Батерман - Цумуги (Вадим)
-	  </p>
+    <div class="expandableBlock">
+      <h2 style="font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}; text-indent: 1em">Информация</h2>
+    
+	
+	
+      <div class="gridInfo moreText">
+	    <div class="label">Статус:</div>
+          <div>
+            <span class="status-done" style="font-size: ${window.innerWidth <= 600 ? '0.8rem' : '1rem'}">Вышел 1 эпизод</span>
+          </div>
 
+	
+  	    <hr>
+	  
+        <div class="label">Роли озвучивают:</div>
+	    <div>
+	  	  <span class="desc" style="font-size: ${window.innerWidth <= 600 ? '0.8rem' : '1rem'}">Злодей Бо Финн – Юи (Фин), Уи, Нодока, Савако<br>
+		  Крендель – Рицу (Максим)<br>
+		  Никита Доброжирович Македонский – Мио (Никита)<br>
+		  Психопатрик Батерман – Цумуги (Вадим)</span>
+	    </div>
+
+        <hr>
+
+        <div class="label">Описание:</div>
+          <div>
+            <span class="desc" style="font-size: ${window.innerWidth <= 600 ? '0.8rem' : '1rem'}">D-ON (или же Дейон) — это наш трэш-проект на основе аниме K-ON. Мы попытались соединить наш юмор, тонну абсурда и немного музыки, чтобы создать нечто рофельное.</span>
+          </div>
+      </div>
+
+	
+
+
+      <button class="toggleMoreBtn">Показать больше</button>
     </div>
-    <button class="toggleMoreBtn">Показать больше</button>
-  </div>
-`;
+  `;
+
   // Плеер
   playerDon.style.display = 'block';
   textContent.appendChild(playerDon);
@@ -304,7 +328,6 @@ uls.addEventListener('click', e => {
   deion.style.display = 'none';
   meme.style.display = 'none';
   ulss.style.display = 'block';
-  document.body.style.paddingTop = '13px';
 
   textContent.innerHTML = `
     <h1 style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.3rem' : '3rem'}">
@@ -312,18 +335,36 @@ uls.addEventListener('click', e => {
     </h1>
     <div id="ulsQuote"></div>
 
-  <div class="expandableBlock">
-    <h2 style="font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}; text-indent: 1em">Описание</h2>
-    <p style="text-indent: 1.5em;">
-      ВАЖНО
-      <span class="dots">...</span>
-    </p>
-    <div class="moreText">
-      <p style="text-indent: 1.5em;">Не жмите на кнопку, иначе сайт полетит по пизде!</p>
+    <div class="expandableBlock">
+      <h2 style="font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}; text-indent: 1em">Информация</h2>
+    
+	
+	
+      <div class="gridInfo moreText">
+	    <div class="label">Статус:</div>
+          <div>
+            <span class="status-writing" style="font-size: ${window.innerWidth <= 600 ? '0.8rem' : '1rem'}">Пишется сценарий</span>
+          </div>
+
+	
+
+
+        <hr>
+
+        <div class="label">Описание:</div>
+          <div>
+            <span class="desc" style="font-size: ${window.innerWidth <= 600 ? '0.8rem' : '1rem'}">Ни в коем случае не жмите на кнопку - иначе сайт не выдержит и всё полетит к хуям</span>
+          </div>
+      </div>
+
+	
+
+
+      <button class="toggleMoreBtn">Показать больше</button>
     </div>
-    <button class="toggleMoreBtn">Показать больше</button>
-  </div>
   `;
+
+
 
   // Плеер
   playerUls.style.display = 'block';
@@ -389,6 +430,8 @@ document.querySelectorAll('.menu-item a').forEach(link => {
   });
 });
 
-window.addEventListener('DOMContentLoaded', () => {
-  homeLink.click(); // симулируем клик по "Главная"
+window.addEventListener('load', () => {
+  requestAnimationFrame(() => {
+    homeLink.click();
+  });
 });
