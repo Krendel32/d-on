@@ -430,8 +430,6 @@ document.querySelectorAll('.menu-item a').forEach(link => {
   });
 });
 
-window.addEventListener('load', () => {
-  requestAnimationFrame(() => {
-    homeLink.click();
-  });
+window.addEventListener('DOMContentLoaded', () => {
+  homeLink.click(); // симулируем клик по "Главная"
 });
