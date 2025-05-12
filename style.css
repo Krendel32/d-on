@@ -115,7 +115,11 @@ video { width: 60%;  border: none; background: #000; display: none; margin: auto
   main#content {min-height: 50vh;}
   #content {max-height: 100%;}
   #pageName { display: none;}
-  #easterHint {left: 50%;}
+  #easterHint {
+    margin-left: 0;
+    transform: translateX(-50%) translateY(-10px);
+
+  }
 }
 #topbar {
   position: fixed;
@@ -408,7 +412,7 @@ body.loading {
 #easterHint {
   position: absolute;
   top: 50px; /* ниже топбара */
-  left: 85%;
+  right: 0;
   background: #333;
   color: #fff;
   padding: 10px 15px;
