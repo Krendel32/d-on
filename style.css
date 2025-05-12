@@ -309,7 +309,7 @@ video { width: 60%;  border: none; background: #000; display: none; margin: auto
   text-indent: 0;
   background-color: #1b5e20; /* насыщенный зелёный */
   color: white;
-  padding: 2px 8px;
+  padding: 5px 8px;
   border-radius: 6px;
   font-size: 0.9rem;
   font-weight: bold;
@@ -332,6 +332,15 @@ video { width: 60%;  border: none; background: #000; display: none; margin: auto
   border-radius: 6px;
   color: #fff;
   background-color: #282828;
+  vertical-align: middle;
+}
+
+.quote {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: #fff;
+  background-color: #303030;
   vertical-align: middle;
 }
 
