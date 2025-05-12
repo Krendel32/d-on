@@ -493,7 +493,10 @@ Memee.addEventListener('click', e => {
   anek4.className = 'textBlock align-right';
   anek4.style.width = `${window.innerWidth <= 600 ? '100%' : '50%'}`;
   anek4.innerHTML = `<p>
-    </p>
+    Ёжик по травке бежит и хохочет,<br>
+	Ёжику травка пипиську щекочет!<br>
+	Травка закончилась - гравий пошёл!<br>
+	Ёжик домой без пиписьки пришёл.</p>
 	<p style="text-align: right">©Крендель</p>
   `;
   textContent.appendChild(anek4);
