@@ -9,7 +9,7 @@ const don = document.getElementById('don');
 const deion = document.getElementById('deion');
 const uls = document.getElementById('uls');
 const ulss = document.getElementById('ulss');
-
+const pageName = document.getElementById('pageName');
 const playerDon = document.getElementById('playerDon');
 const playerUls = document.getElementById('playerUls');
 
@@ -209,6 +209,9 @@ homeLink.addEventListener('click', e => {
   deion.style.display = 'none';
   meme.style.display = 'none';
   ulss.style.display = 'none';
+  pageName.innerHTML = '';
+  pageName.innerHTML = `<p style="font-size: 1.8rem">Главная</p>`;
+
   textContent.innerHTML = '';
   requestAnimationFrame(() => {
     textContent.style.display = 'block';
@@ -251,7 +254,8 @@ don.addEventListener('click', e => {
   deion.style.display = 'block';
   meme.style.display = 'none';
   ulss.style.display = 'none';
-
+  pageName.innerHTML = '';
+  pageName.innerHTML = `<p style="font-size: 1.8rem">D-ON!</p>`;
   textContent.innerHTML = `
     <h1 style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.3rem' : '3rem'}">
       Добро пожаловать в Клуб Дебильной Музыки!
@@ -328,7 +332,8 @@ uls.addEventListener('click', e => {
   deion.style.display = 'none';
   meme.style.display = 'none';
   ulss.style.display = 'block';
-
+  pageName.innerHTML = '';
+  pageName.innerHTML = `<p style="font-size: 1.8rem">Деградирующая Звезда</p>`;
   textContent.innerHTML = `
     <h1 style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.3rem' : '3rem'}">
       В разработке!
@@ -408,6 +413,8 @@ Memee.addEventListener('click', e => {
   textContent.style.display = 'none';
   meme.style.display = 'block';
   sidebar.classList.remove('open');
+  pageName.innerHTML = '';
+  pageName.innerHTML = `<p style="font-size: ${window.innerWidth <= 600 ? '1.5rem' : '1.8rem'}">заглушка</p>`;
   document.querySelector('main#content').scrollTo({ top: 0, behavior: 'smooth' });
 });
 

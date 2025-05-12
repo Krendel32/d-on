@@ -114,6 +114,7 @@ video { width: 60%;  border: none; background: #000; display: none; margin: auto
   html, body { overflow-x: hidden; max-width: 100%}
   main#content {min-height: 50vh;}
   #content {max-height: 100%;}
+  #pageName { display: none;}
 }
 #topbar {
   position: fixed;
@@ -369,5 +370,12 @@ video { width: 60%;  border: none; background: #000; display: none; margin: auto
 }
 
 body.loading {
-    overflow: hidden;
+  overflow: hidden;
+}
+
+#pageName {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
 }
