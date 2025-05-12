@@ -110,6 +110,22 @@ function resetAllPlayers() {
   });
 }
 
+const logoBlock = document.getElementById('logoBlock');
+let logoClickCount = 0;
+let logoClickTimer;
+
+logoBlock.addEventListener('click', () => {
+  logoClickCount++;
+
+  clearTimeout(logoClickTimer);
+  logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 1000); // сброс через 1 сек
+
+  if (logoClickCount >= 3) {
+    document.querySelector('.menu-item a#Memee')?.parentElement?.classList.remove('hidden');
+    console.log('%c🎉 Мем-страница активирована через логотип!', 'color: orange; font-weight: bold');
+    logoClickCount = 0;
+  }
+});
 
 function initExpandableBlocks() {
   document.querySelectorAll('.expandableBlock').forEach(block => {
@@ -403,18 +419,77 @@ uls.addEventListener('click', e => {
   document.querySelector('main#content').scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// Мем-кнопка
+// Анекдоты
 Memee.addEventListener('click', e => {
   e.preventDefault();
   setBackgroundSet('default');
+  monolith(0);
   resetAllPlayers();
   deion.style.display = 'none';
   ulss.style.display = 'none';
-  textContent.style.display = 'none';
   meme.style.display = 'block';
   sidebar.classList.remove('open');
+  textContent.innerHTML = '';
   pageName.innerHTML = '';
-  pageName.innerHTML = `<p style="font-size: ${window.innerWidth <= 600 ? '1.5rem' : '1.8rem'}">заглушка</p>`;
+  pageName.innerHTML = `<p style="font-size: 1.8rem">Анекдоты от ДебДаба</p>`;
+  textContent.style.display = 'block';
+  // Первый блок
+  const anek1 = document.createElement('div');
+  anek1.className = 'textBlock';
+  anek1.style.width = `${window.innerWidth <= 600 ? '100%' : '50%'}`;
+  anek1.innerHTML = `<p>
+    - Позвольте папироску!<br>
+    - Вы моих курить не будете.<br>
+	- А что - крепкие очень?<br>
+	- Нет..<br>
+	- Слабые?<br>
+	- Нет..<br>
+	- А что же?<br>
+	- Я вам не дам просто.</p>
+	<p style="text-align: right">©Никита Доброжирович Македонский</p>
+  `;
+  textContent.appendChild(anek1);
+
+  // Второй блок
+  const anek2 = document.createElement('div');
+  anek2.className = 'textBlock align-right';
+  anek2.style.width = `${window.innerWidth <= 600 ? '100%' : '50%'}`;
+  anek2.innerHTML = `<p>
+    Клинтон спрашивает у Бога.<br>
+	— Когда мой народ будет жить счастливой жизнью?<br>
+	— Через двадцать лет, — ответил Бог.<br>
+	Клинтон заплакал и ушел. Тогда Ельцин спрашивает:<br>
+	— Господи, а когда мой народ будет жить счастливо?<br>
+	Бог заплакал и ушел.</p>
+	<p style="text-align: right">©Злодей Бо Финн</p>
+  `;
+  textContent.appendChild(anek2);
+
+  // Третий блок
+  const anek3 = document.createElement('div');
+  anek3.className = 'textBlock';
+  anek3.style.width = `${window.innerWidth <= 600 ? '100%' : '50%'}`;
+  anek3.innerHTML = `<p>Сидит нарик на камне возле речки, косяк забивает. К нему подходит мужик:<br>
+    — Слышь, братан! Ты знаешь, где эту речку можно вброд перейти?<br>
+	— Да прямо тут и проходи!<br>
+	Ну мужик и пошел. Сделал пару шагов и скрылся под водой. Вылазит весь мокрый и злой, подходит к нарику и спрашивает:<br>
+	— Ты чё мне тут наплёл?!<br>
+	— Слышь, братан, клянусь — утки всего полчаса назад речку здесь по пояс перешли!
+    </p>
+	<p style="text-align: right">©Психопатрик Батерман</p>
+  `;
+  textContent.appendChild(anek3);
+
+  // Четвёртый блок
+  const anek4 = document.createElement('div');
+  anek4.className = 'textBlock align-right';
+  anek4.style.width = `${window.innerWidth <= 600 ? '100%' : '50%'}`;
+  anek4.innerHTML = `<p>
+    </p>
+	<p style="text-align: right">©Крендель</p>
+  `;
+  textContent.appendChild(anek4);
+
   document.querySelector('main#content').scrollTo({ top: 0, behavior: 'smooth' });
 });
 
