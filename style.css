@@ -379,3 +379,26 @@ body.loading {
   transform: translateX(-50%);
   font-weight: bold;
 }
+
+.hidden {
+  display: none;
+}
+
+.dualBlock {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* расстояние между блоками */
+  flex-wrap: wrap; /* чтобы не налезало на мобилках */
+}
+
+.dualBlock .textBlock {
+  flex: 1 1 45%; /* гибкая ширина */
+  background: #222;
+  padding: 20px;
+  border-radius: 8px;
+  color: #eee;
+}
+
+.align-right {
+  margin-left: auto;
+}
