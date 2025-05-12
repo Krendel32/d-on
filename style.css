@@ -136,6 +136,7 @@ video { width: 60%;  border: none; background: #000; display: none; margin: auto
   border-radius: 4px;
 } 
 #logoBlock {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -401,4 +402,25 @@ body.loading {
 
 .align-right {
   margin-left: auto;
+}
+
+#easterHint {
+  position: absolute;
+  top: 50px; /* ниже топбара */
+  left: 85%;
+  background: #333;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 9999;
+}
+
+#easterHint.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
