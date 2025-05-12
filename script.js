@@ -111,19 +111,27 @@ function resetAllPlayers() {
 }
 
 const logoBlock = document.getElementById('logoBlock');
-let logoClickCount = 0;
-let logoClickTimer;
+const easterHint = document.getElementById('easterHint');
+const memeLink = document.querySelector('.menu-item a[href="#"][id="Memee"]');
+
+let clickCount = 0;
 
 logoBlock.addEventListener('click', () => {
-  logoClickCount++;
+  clickCount++;
+  if (clickCount === 3) {
+    if (memeLink) document.querySelector('.menu-item a#Memee')?.parentElement?.classList.remove('hidden');
 
-  clearTimeout(logoClickTimer);
-  logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 1000); // сброс через 1 сек
+    // показать подсказку
+    easterHint.classList.remove('hidden');
+    requestAnimationFrame(() => { // нужно для срабатывания анимации
+      easterHint.classList.add('visible');
+    });
 
-  if (logoClickCount >= 3) {
-    document.querySelector('.menu-item a#Memee')?.parentElement?.classList.remove('hidden');
-    console.log('%c🎉 Мем-страница активирована через логотип!', 'color: orange; font-weight: bold');
-    logoClickCount = 0;
+    // скрыть через 4 секунды
+    setTimeout(() => {
+      easterHint.classList.remove('visible');
+      setTimeout(() => easterHint.classList.add('hidden'), 500);
+    }, 2000);
   }
 });
 
