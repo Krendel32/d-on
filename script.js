@@ -344,7 +344,7 @@ uls.addEventListener('click', e => {
 	    <hr>
 	    <div class="label">Статус:</div>
           <div>
-            <span class="status-writing" style="font-size: ${window.innerWidth <= 600 ? '0.8rem' : '1rem'}">Пишется сценарий</span>
+            <span class="status-writing" style="font-size: ${window.innerWidth <= 600 ? '0.8rem' : '1rem'}">Пишется сценарий к 1 эпизоду</span>
           </div>
 
 		<hr>
