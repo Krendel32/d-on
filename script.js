@@ -23,13 +23,13 @@ const episodesUls = [
 ];
 
 const donQuotes = [
-  'Не аниме, а карнавал абсурда!',
-  'Музыка, абсурд и никакого здравого смысла',
-  'Чифирь слабый какой-то',
+  '<span class="quote">Не аниме, а карнавал абсурда!</span>',
+  '<span class="quote">Музыка, абсурд и никакого здравого смысла</span>',
+  '<span class="quote">Чифирь слабый какой-то</span>',
 ];
 
 const ulsQuotes = [
-  '"Деградирующая Звезда" — это не метафора, это диагноз',
+  '<span class="quote">"Деградирующая Звезда" — это не метафора, это диагноз</span>',
 ];
 
 function preloadImages(...urls) {
@@ -114,13 +114,11 @@ function resetAllPlayers() {
 function initExpandableBlocks() {
   document.querySelectorAll('.expandableBlock').forEach(block => {
     const btn = block.querySelector('.toggleMoreBtn');
-    const more = block.querySelector('.moreText');
-    const dots = block.querySelector('.dots');
+    const more = block.querySelector('.moreText') || block.querySelector('.gridInfo');
 
     btn.addEventListener('click', () => {
       const isExpanded = more.classList.contains('expanded');
       more.classList.toggle('expanded', !isExpanded);
-      dots.style.display = isExpanded ? 'inline' : 'none';
       btn.textContent = isExpanded ? 'Показать больше' : 'Скрыть';
     });
   });
@@ -220,7 +218,7 @@ homeLink.addEventListener('click', e => {
   const welcomeBlock = document.createElement('div');
   welcomeBlock.className = 'textBlock';
   welcomeBlock.innerHTML = `
-    <h1 style="text-align: center">Добро пожаловать!</h1>
+    <h1 style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.5rem' : '2rem'}">Добро пожаловать!</h1>
     <p style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}">Слева сверху, в меню навигации, есть выбор желаемого контента. Ниже наведена краткая информация о нас</p>
   `;
   textContent.appendChild(welcomeBlock);
@@ -229,11 +227,11 @@ homeLink.addEventListener('click', e => {
   const infoBlock = document.createElement('div');
   infoBlock.className = 'textBlock';
   infoBlock.innerHTML = `
-    <h1 style="text-align: center">Кто же мы такие?</h1>
-    <p style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}">Мы - Проект пародийной переозвучки, созданный несколькими школьниками из СНГ для развлечения. Проект запущен 25 января 2025 года, и на сегодняшний день у нас готов только один проект - D-ON. На данный момент ведётся активная работа над новым проектом - над Деградирующей Звездой<br>
-	  Если хотите следить за прогрессом - подпишитесь на наш <a href="https://t.me/+xDrz3EcbS-8zMmYy" class="external" target="_blank" style="text-decoration: none; color: #b8c6ff">Телеграм канал</a><br>
-	  Также у нас есть <a href="https://www.youtube.com/@Deb_Dub" class="external" target="_blank" style="text-decoration: none; color: #ffb8b8">Ютуб канал</a>, на котором будут выкладываться все серии переозвучек, за которые нам не прилетит АП (да-да TBS, да-да...)
-	</p>
+    <h1 style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.5rem' : '2rem'}">Кто же мы такие?</h1>
+    <p style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}">Мы - Проект пародийной переозвучки, созданный несколькими школьниками из СНГ для развлечения. Проект запущен 25 января 2025 года, и на сегодняшний день у нас готов только один проект - D-ON. На данный момент ведётся активная работа над новым проектом - над Деградирующей Звездой</p>
+	<p style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}">Если хотите следить за прогрессом - подпишитесь на наш <a href="https://t.me/+xDrz3EcbS-8zMmYy" class="external" target="_blank" style="text-decoration: none; color: #b8c6ff">Телеграм канал</a></p>
+	<p style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}">Также у нас есть <a href="https://www.youtube.com/@Deb_Dub" class="external" target="_blank" style="text-decoration: none; color: #ffb8b8">Ютуб канал</a>, на котором будут выкладываться все серии переозвучек, за которые нам не прилетит АП</p>
+	
   `;
   textContent.appendChild(infoBlock);
 
@@ -263,10 +261,12 @@ don.addEventListener('click', e => {
     <div class="expandableBlock">
       <h2 style="font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}; text-indent: 1em">Информация</h2>
     
-	
+	  
 	
       <div class="gridInfo moreText">
+	    <hr>
 	    <div class="label">Статус:</div>
+		
           <div>
             <span class="status-done" style="font-size: ${window.innerWidth <= 600 ? '0.8rem' : '1rem'}">Вышел 1 эпизод</span>
           </div>
@@ -286,7 +286,7 @@ don.addEventListener('click', e => {
 
         <div class="label">Описание:</div>
           <div>
-            <span class="desc" style="font-size: ${window.innerWidth <= 600 ? '0.8rem' : '1rem'}">D-ON (или же Дейон) — это наш трэш-проект на основе аниме K-ON. Мы попытались соединить наш юмор, тонну абсурда и немного музыки, чтобы создать нечто рофельное.</span>
+            <span class="desc" style="font-size: ${window.innerWidth <= 600 ? '0.8rem' : '1rem'}">D-ON (или же Дейон) — это наш трэш-проект на основе аниме K-ON. Мы попытались соединить наш юмор, тонну абсурда и немного музыки, чтобы создать нечто рофельное. Проект D-ON является эксклюзивным для сайта</span>
           </div>
       </div>
 
@@ -341,12 +341,23 @@ uls.addEventListener('click', e => {
 	
 	
       <div class="gridInfo moreText">
+	    <hr>
 	    <div class="label">Статус:</div>
           <div>
             <span class="status-writing" style="font-size: ${window.innerWidth <= 600 ? '0.8rem' : '1rem'}">Пишется сценарий</span>
           </div>
 
-	
+		<hr>
+		
+		<div class="label">Роли озвучивают:</div>
+	    <div>
+	  	  <span class="desc" style="font-size: ${window.innerWidth <= 600 ? '0.8rem' : '1rem'}">Злодей Бо Финн – Коната<br>
+		  Психопатрик Батерман – Кагами<br>
+		  Никита Доброжирович Македонский – Цукаса<br>
+		  Крендель – Миюки</span>
+	    </div>
+		
+		
 
 
         <hr>
