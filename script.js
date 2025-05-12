@@ -228,7 +228,7 @@ homeLink.addEventListener('click', e => {
   infoBlock.className = 'textBlock';
   infoBlock.innerHTML = `
     <h1 style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.5rem' : '2rem'}">Кто же мы такие?</h1>
-    <p style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}">Мы - "студия" пародийной переозвучки, созданная несколькими школьниками из СНГ для развлечения. Она запущен 25 января 2025 года, и на сегодняшний день у нас готов только один проект - D-ON. На данный момент ведётся активная работа над новым проектом - над Деградирующей Звездой</p>
+    <p style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}">Мы - студия пародийной переозвучки, созданная несколькими школьниками из СНГ для развлечения. Она запущена 25 января 2025 года, и на сегодняшний день у нас готов только один проект - D-ON. На данный момент ведётся активная работа над новым проектом - над Деградирующей Звездой</p>
 	<p style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}">Если хотите следить за прогрессом - подпишитесь на наш <a href="https://t.me/+xDrz3EcbS-8zMmYy" class="external" target="_blank" style="text-decoration: none; color: #b8c6ff">Телеграм канал</a></p>
 	<p style="text-align: center; font-size: ${window.innerWidth <= 600 ? '1.1rem' : '1.5rem'}">Также у нас есть <a href="https://www.youtube.com/@Deb_Dub" class="external" target="_blank" style="text-decoration: none; color: #ffb8b8">Ютуб канал</a>, на котором будут выкладываться все серии переозвучек, за которые нам не прилетит АП</p>
 	
