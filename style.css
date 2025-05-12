@@ -115,6 +115,7 @@ video { width: 60%;  border: none; background: #000; display: none; margin: auto
   main#content {min-height: 50vh;}
   #content {max-height: 100%;}
   #pageName { display: none;}
+  #easterHint {left: 50%;}
 }
 #topbar {
   position: fixed;
