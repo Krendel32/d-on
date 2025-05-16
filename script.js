@@ -507,7 +507,7 @@ Memee.addEventListener('click', e => {
   anek5.style.width = `${window.innerWidth <= 600 ? '100%' : '50%'}`;
   anek5.innerHTML = `<p>
     Заходит улитка в бар... <br>
-    Продолжение читайте на <a href="https://www.aviasales.ru/map" target="_blank" style="text-decoration: none; color:rgb(121, 244, 255)">www.yande.ru<a></p>
+    Продолжение читайте на <a href="https://www.aviasales.ru/map" target="_blank" style="text-decoration: none; color: #b8c6ff">www.yande.ru<a></p>
 	<p style="text-align: right">©cheburek866 | FoxWorld</p>
   `;
   textContent.appendChild(anek5);
