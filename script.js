@@ -439,7 +439,7 @@ Memee.addEventListener('click', e => {
   sidebar.classList.remove('open');
   textContent.innerHTML = '';
   pageName.innerHTML = '';
-  pageName.innerHTML = `<p style="font-size: 1.8rem">Анекдоты от ДебДаба</p>`;
+  pageName.innerHTML = `<p style="font-size: 1.8rem">Анекдоты</p>`;
   textContent.style.display = 'block';
   // Первый блок
   const anek1 = document.createElement('div');
@@ -454,7 +454,7 @@ Memee.addEventListener('click', e => {
 	- Нет..<br>
 	- А что же?<br>
 	- Я вам не дам просто.</p>
-	<p style="text-align: right">©Никита Доброжирович Македонский</p>
+	<p style="text-align: right">©Никита Доброжирович Македонский | DebDub</p>
   `;
   textContent.appendChild(anek1);
 
@@ -469,7 +469,7 @@ Memee.addEventListener('click', e => {
 	Клинтон заплакал и ушел. Тогда Ельцин спрашивает:<br>
 	— Господи, а когда мой народ будет жить счастливо?<br>
 	Бог заплакал и ушел.</p>
-	<p style="text-align: right">©Злодей Бо Финн</p>
+	<p style="text-align: right">©Злодей Бо Финн | DebDub</p>
   `;
   textContent.appendChild(anek2);
 
@@ -484,7 +484,7 @@ Memee.addEventListener('click', e => {
 	— Ты чё мне тут наплёл?!<br>
 	— Слышь, братан, клянусь — утки всего полчаса назад речку здесь по пояс перешли!
     </p>
-	<p style="text-align: right">©Психопатрик Батерман</p>
+	<p style="text-align: right">©Психопатрик Батерман | DebDub</p>
   `;
   textContent.appendChild(anek3);
 
@@ -497,7 +497,7 @@ Memee.addEventListener('click', e => {
 	Ёжику травка пипиську щекочет!<br>
 	Травка закончилась - гравий пошёл!<br>
 	Ёжик домой без пиписьки пришёл.</p>
-	<p style="text-align: right">©Крендель</p>
+	<p style="text-align: right">©Крендель | DebDub</p>
   `;
   textContent.appendChild(anek4);
 
